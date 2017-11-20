@@ -1,0 +1,20 @@
+{
+  "name": "node_electron",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "electron ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jeedy/node_electron.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jeedy/node_electron/issues"
+  },
+  "homepage": "https://github.com/jeedy/node_electron#readme"
+}
