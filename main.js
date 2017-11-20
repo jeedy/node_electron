@@ -34,7 +34,7 @@ ipc.on('mul-sync', function(event, arg){
 ipc.on('mul-async', function(event, arg){
     console.log(arg);
 
-    var result = arg.a*arg.b;
+    var result = arg.a * arg.b;
     event.sender.send('mul-async-reply', result);
 });
 
