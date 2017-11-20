@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<header>
+    <meta charset="UTF-8">
+    <title>Test APP</title>
+    <script>
+
+        var electron = require('electron');
+
+        var ipc = electron.ipcRenderer;
+        var info = null;
+
+        window.onload = function(){
+            info = document.getElementById("info");
+            info.innerHTML = "Node var."+process.version+"<br>"
+            + "atom ver." + process.versions['electron'];
+
+            info.innerHTML += "<br> ================================ <br>";
+            
+            testSync();
+            testASync();
+        }
+
+        function msg (msg){
+            info.innerHTML += msg+"<br>";
+        }
+
+        function testSync(){
+            var res = ipc.sendSync('mul-sync', {a:30, b:2});
+            msg("sync result="+res);
+        }
+
+        function testASync(){
+            ipc.send('mul-async', {a:30, b:2});
+
+            ipc.on('mul-async-reply', function(evt, arg){
+                msg("async result="+arg);
+            });
+        }
+
+        function financeCapture(){
+            var res = ipc.send('capture-sync',{url: "http://finance.naver.com"});
+        }
+
+        function delayshot(){
+            var res = ipc.send('delayshot-sync',{url: "https://www.google.co.kr/search?source=lnms&isch&q="+encodeURIComponent('고양이')})
+        }
+
+    </script>
+    
+</header>
+<body>
+    <h1>test app</h1>
+    <p id="info"></p>
+
+    <ul>
+        <li><button type='button' onclick="financeCapture()">finance-capture</button></li>
+        <li><button type='button' onclick="delayshot()">delay-shot</button></li>
+    </ul>
+</body>
+</html>
